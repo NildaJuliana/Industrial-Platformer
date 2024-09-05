@@ -14,3 +14,7 @@ func _physics_process(_delta):
 	
 	var target_rotation = direction.x * 45.0
 	sprite.rotation_degrees = lerp(sprite.rotation_degrees, target_rotation, lerp_factor)
+
+
+func _on_area_2d_body_entered(body):
+		print('aaa')
