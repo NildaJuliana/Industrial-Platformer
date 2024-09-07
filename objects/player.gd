@@ -9,7 +9,7 @@ func _physics_process(_delta):
 
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var target_velocity = direction * speed * 100.0
-	velocity = lerp (velocity, target_velocity, lerp_factor)
+	velocity = lerp(velocity, target_velocity, lerp_factor)
 	move_and_slide()
 	
 	var target_rotation = direction.x * 45.0
@@ -17,4 +17,4 @@ func _physics_process(_delta):
 
 
 func _on_area_2d_body_entered(body):
-		print('aaa')
+		pass
