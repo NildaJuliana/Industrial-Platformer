@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ypftddllpvlj" path="res://addons/Alien pack/shipYellow_manned.png" id="2_b76sx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6jot"]
-radius = 32.0624
+radius = 41.0
 
 [node name="player" type="CharacterBody2D"]
 z_index = 2
@@ -21,6 +21,7 @@ shape = SubResource("CircleShape2D_d6jot")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_d6jot")
 
 [node name="Sprite" type="Sprite2D" parent="."]
