@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg66tnr36hplk"
-path="res://.godot/imported/sandHalf_right.png-8fd71f25f158971b72710bc3382824af.ctex"
+uid="uid://cotapy3wpsatn"
+path="res://.godot/imported/platformerPack_industrial_tilesheet.png-f5d11c943e3bb20a1775088c645ec6e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/kenney_platformer-pack-redux/PNG/Ground/Sand/sandHalf_right.png"
-dest_files=["res://.godot/imported/sandHalf_right.png-8fd71f25f158971b72710bc3382824af.ctex"]
+source_file="res://addons/kenney_platformer-pack-redux/Vector/platformerPack_industrial_tilesheet.png"
+dest_files=["res://.godot/imported/platformerPack_industrial_tilesheet.png-f5d11c943e3bb20a1775088c645ec6e7.ctex"]
 
 [params]
 

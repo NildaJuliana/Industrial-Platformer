@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=7 format=3 uid="uid://d1bmbhu2pxbr4"]
 
-[ext_resource type="Texture2D" uid="uid://cotapy3wpsatn" path="res://addons/Industrial platform pack/platformerPack_industrial_tilesheet.png" id="1_eiwj4"]
+[ext_resource type="Texture2D" uid="uid://cotapy3wpsatn" path="res://addons/kenney_platformer-pack-redux/Vector/platformerPack_industrial_tilesheet.png" id="1_eiwj4"]
 [ext_resource type="Texture2D" uid="uid://dq4qkxc7kf1vj" path="res://addons/kenney_platformer-pack-redux/Vector/sheet.png" id="2_oo87y"]
 [ext_resource type="Texture2D" uid="uid://dv1r21s0ay2vm" path="res://addons/kenney_platformer-pack-redux/Vector/vector_tiles.svg" id="3_dlusi"]
 

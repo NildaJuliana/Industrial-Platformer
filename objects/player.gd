@@ -4,6 +4,12 @@ extends CharacterBody2D
 @export var speed = 3.0
 @export_range(0, 1) var lerp_factor = 0.5
 @onready var sprite = %Sprite
+var currCamera: Camera2D = null
+
+func _ready():
+	currCamera = get_viewport().get_camera_2d()
+	%RemoteTransform2D.remote_path = currCamera.get_path()
+	
 
 func _physics_process(_delta):
 
