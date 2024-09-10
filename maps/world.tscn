@@ -105,5 +105,3 @@ centered = false
 
 [node name="player" parent="." instance=ExtResource("11_epv4m")]
 position = Vector2(123, 43)
-speed = null
-is_kumping = null

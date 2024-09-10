@@ -34,4 +34,4 @@ func _physics_process(_delta):
 
 func _on_area_2d_body_entered(body):
 	if body is TileMap:
-		(body as TileMap).get_layer_name()
+		pass
