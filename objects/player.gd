@@ -4,6 +4,7 @@ const WALK_ANIMATION = "walk"
 const IDLE_ANIMATION = "idle"
 
 @export var speed = 400
+@export var is_kumping = false
 
 var screen_size
 
@@ -30,8 +31,7 @@ func _physics_process(_delta):
 			$AnimatedSprite2D.flip_h = velocity.x < 0
 		else:
 			$AnimatedSprite2D.animation = IDLE_ANIMATION
-			
-		
 
 func _on_area_2d_body_entered(body):
-	pass
+	if body is TileMap:
+		(body as TileMap).get_layer_name()
