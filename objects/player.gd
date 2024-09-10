@@ -1,20 +1,37 @@
-extends CharacterBody2D
+extends RigidBody2D
 
+const WALK_ANIMATION = "walk"
+const IDLE_ANIMATION = "idle"
 
-@export var speed = 3.0
-@export_range(0, 1) var lerp_factor = 0.5
-@onready var sprite = %Sprite
+@export var speed = 400
+
+var screen_size
+
+func _ready():
+	screen_size = get_viewport_rect().size
 	
 func _physics_process(_delta):
-
-	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var target_velocity = direction * speed * 100.0
-	velocity = lerp(velocity, target_velocity, lerp_factor)
-	move_and_slide()
-	
-	var target_rotation = direction.x * 45.0
-	sprite.rotation_degrees = lerp(sprite.rotation_degrees, target_rotation, lerp_factor)
-
+		var velocity = Vector2.ZERO
+		
+		if Input.is_action_pressed("move_right"):
+			velocity.x += 1
+		if Input.is_action_pressed("move_left"):
+			velocity.x -= 1
+			
+		if velocity.length() > 0:
+			velocity = velocity.normalized() * speed
+			$AnimatedSprite2D.play()
+			
+		position += velocity * _delta
+		position = position.clamp(Vector2.ZERO, screen_size)
+			
+		if velocity.x != 0:
+			$AnimatedSprite2D.animation = WALK_ANIMATION
+			$AnimatedSprite2D.flip_h = velocity.x < 0
+		else:
+			$AnimatedSprite2D.animation = IDLE_ANIMATION
+			
+		
 
 func _on_area_2d_body_entered(body):
-		pass
+	pass
