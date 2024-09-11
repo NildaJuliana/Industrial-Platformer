@@ -30,7 +30,6 @@ func _physics_process(_delta):
 			
 		# Update position
 		position += velocity * _delta
-		position = position.clamp(Vector2.ZERO, screen_size)
 			
 		# Update animation
 		if velocity.x != 0:
