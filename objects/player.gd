@@ -4,34 +4,44 @@ const WALK_ANIMATION = "walk"
 const IDLE_ANIMATION = "idle"
 
 @export var speed = 400
-@export var is_kumping = false
+@export var jump_force = -500
+@export var is_jumping = false
 
+var velocity = Vector2.ZERO
 var screen_size
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	
 func _physics_process(_delta):
-		var velocity = Vector2.ZERO
+		velocity = Vector2.ZERO
 		
 		if Input.is_action_pressed("move_right"):
 			velocity.x += 1
 		if Input.is_action_pressed("move_left"):
 			velocity.x -= 1
+		if Input.is_action_just_released('jump'):
+			self.apply_impulse(Vector2(0, jump_force))
+			is_jumping = true
 			
 		if velocity.length() > 0:
 			velocity = velocity.normalized() * speed
 			$AnimatedSprite2D.play()
 			
+		# Update position
 		position += velocity * _delta
 		position = position.clamp(Vector2.ZERO, screen_size)
 			
+		# Update animation
 		if velocity.x != 0:
-			$AnimatedSprite2D.animation = WALK_ANIMATION
+			if !is_jumping:
+				$AnimatedSprite2D.animation = WALK_ANIMATION
+			else:
+				pass
 			$AnimatedSprite2D.flip_h = velocity.x < 0
 		else:
 			$AnimatedSprite2D.animation = IDLE_ANIMATION
 
 func _on_area_2d_body_entered(body):
 	if body is TileMap:
-		pass
+		is_jumping = false
