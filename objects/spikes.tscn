@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc7hip5hkgpa2"]
+
+[ext_resource type="Texture2D" uid="uid://ks83ugdt3sv7" path="res://addons/kenney_platformer-pack-redux/PNG/Tiles/spikes.png" id="1_1gn8x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chbwe"]
+size = Vector2(126, 65)
+
+[node name="Sipkes" type="Sprite2D"]
+texture = ExtResource("1_1gn8x")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 31.5)
+shape = SubResource("RectangleShape2D_chbwe")

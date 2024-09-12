@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci7m7a7yi0srx"]
+[gd_scene load_steps=8 format=3 uid="uid://ci7m7a7yi0srx"]
 
 [ext_resource type="Script" path="res://objects/player.gd" id="1_bhdxc"]
 [ext_resource type="Texture2D" uid="uid://b7kwya5fn3imf" path="res://addons/kenney_platformer-pack-redux/PNG/Players/128x256/Blue/alienBlue_stand.png" id="2_hrceo"]
 [ext_resource type="Texture2D" uid="uid://dpn5khn5frf27" path="res://addons/kenney_platformer-pack-redux/PNG/Players/128x256/Blue/alienBlue_walk1.png" id="3_2nree"]
+[ext_resource type="Texture2D" uid="uid://dxgn4w5u3r2vh" path="res://addons/kenney_platformer-pack-redux/PNG/Players/128x256/Blue/alienBlue_jump.png" id="3_5te3k"]
 [ext_resource type="Texture2D" uid="uid://bhgs4hrbpawgf" path="res://addons/kenney_platformer-pack-redux/PNG/Players/128x256/Blue/alienBlue_walk2.png" id="4_ws6de"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oy02j"]
@@ -13,6 +14,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5te3k")
+}],
+"loop": true,
+"name": &"jump",
 "speed": 5.0
 }, {
 "frames": [{
@@ -28,30 +37,22 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ellfv"]
-size = Vector2(75.0001, 102.5)
+size = Vector2(74.0001, 103)
 
 [node name="player" type="RigidBody2D"]
 z_index = 2
+collision_mask = 2
 lock_rotation = true
 script = ExtResource("1_bhdxc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_oy02j")
-animation = &"walk"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.19209e-06, -5.96046e-06)
+position = Vector2(3.12924e-06, -0.5)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_ellfv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1.19209e-06, -5.96046e-06)
-scale = Vector2(0.999999, 0.999999)
-shape = SubResource("RectangleShape2D_ellfv")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
