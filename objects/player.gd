@@ -1,17 +1,29 @@
 extends RigidBody2D
 
+class_name Player
+
 const WALK_ANIMATION = "walk"
 const IDLE_ANIMATION = "idle"
 const JUMP_ANIMATION = "jump"
 
+@export var life = 3
+@export var retries = 2
+
 @export var speed = 400
 @export var jump_force = -600
 
+@export var SpwanPosition: Node2D
+
 var velocity = Vector2.ZERO
+var is_taking_damage = false
 var screen_size
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	position = SpwanPosition.position
+	
+func _process(delta):
+	pass
 	
 func _physics_process(_delta):
 		velocity = Vector2.ZERO
@@ -40,6 +52,27 @@ func _physics_process(_delta):
 		else:
 			$AnimatedSprite2D.animation = IDLE_ANIMATION
 
-#func _on_area_2d_body_entered(body):
-	#if body is TileMap:
-		#is_jumping = false
+
+func take_damage(body: Node2D):
+	if (!is_taking_damage and body is Spikes):
+		life -= 1
+		is_taking_damage = true
+		if (life == 0):
+			$RecoveryTimer.stop()
+			reset_player()
+		else:
+			velocity = Vector2.ZERO
+			self.apply_impulse(Vector2(0, position.y - body.position.y) * 30)
+			$RecoveryTimer.start()
+				
+func reset_player():
+	position = SpwanPosition.position
+	is_taking_damage = false
+	life = 3
+	if retries == 0:
+		retries = 2
+	else:
+		retries-=1
+	
+func _on_recovery_timer_timeout():
+	is_taking_damage = false
