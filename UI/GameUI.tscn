@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvnv8kcs5kkw6"]
+
+[ext_resource type="Script" path="res://UI/GameUI.gd" id="1_0lqe5"]
+
+[sub_resource type="SystemFont" id="SystemFont_1bb8b"]
+font_names = PackedStringArray("Elephant")
+
+[sub_resource type="SystemFont" id="SystemFont_wg6ui"]
+font_names = PackedStringArray("Elephant")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_0lqe5")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -33.0
+offset_right = 23.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.278431, 0.462745, 0.486275, 1)
+theme_override_colors/font_pressed_color = Color(0.14902, 0.168627, 0.470588, 1)
+theme_override_colors/font_hover_color = Color(0.278431, 0.462745, 0.486275, 1)
+theme_override_fonts/font = SubResource("SystemFont_1bb8b")
+theme_override_font_sizes/font_size = 50
+text = "Start"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = SubResource("SystemFont_wg6ui")
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
