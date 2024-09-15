@@ -1,24 +1,63 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci7m7a7yi0srx"]
+[gd_scene load_steps=14 format=3 uid="uid://cu41xrvd7u4cg"]
 
-[ext_resource type="Script" path="res://objects/player.gd" id="1_bhdxc"]
-[ext_resource type="Texture2D" uid="uid://b7kwya5fn3imf" path="res://addons/kenney_platformer-pack-redux/PNG/Players/128x256/Blue/alienBlue_stand.png" id="2_hrceo"]
-[ext_resource type="Texture2D" uid="uid://dpn5khn5frf27" path="res://addons/kenney_platformer-pack-redux/PNG/Players/128x256/Blue/alienBlue_walk1.png" id="3_2nree"]
-[ext_resource type="Texture2D" uid="uid://dxgn4w5u3r2vh" path="res://addons/kenney_platformer-pack-redux/PNG/Players/128x256/Blue/alienBlue_jump.png" id="3_5te3k"]
-[ext_resource type="Texture2D" uid="uid://bhgs4hrbpawgf" path="res://addons/kenney_platformer-pack-redux/PNG/Players/128x256/Blue/alienBlue_walk2.png" id="4_ws6de"]
+[ext_resource type="Texture2D" uid="uid://sbq7y24lwc4d" path="res://addons/kenney_platformer-pack-redux/Spritesheets/spritesheet_players.png" id="1_4n0bn"]
+[ext_resource type="Script" path="res://objects/player.gd" id="1_16yq7"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_oy02j"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgyeq"]
+atlas = ExtResource("1_4n0bn")
+region = Rect2(384, 768, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n46j3"]
+atlas = ExtResource("1_4n0bn")
+region = Rect2(768, 1280, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvwpx"]
+atlas = ExtResource("1_4n0bn")
+region = Rect2(768, 0, 128, 258)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4ege"]
+atlas = ExtResource("1_4n0bn")
+region = Rect2(768, 256, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbvs1"]
+atlas = ExtResource("1_4n0bn")
+region = Rect2(640, 1792, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij380"]
+atlas = ExtResource("1_4n0bn")
+region = Rect2(640, 1280, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_163gi"]
+atlas = ExtResource("1_4n0bn")
+region = Rect2(640, 1024, 128, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7k0h"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_hrceo")
+"texture": SubResource("AtlasTexture_pgyeq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n46j3")
 }],
-"loop": false,
+"loop": true,
+"name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvwpx")
+}],
+"loop": true,
 "name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_5te3k")
+"texture": SubResource("AtlasTexture_y4ege")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbvs1")
 }],
 "loop": true,
 "name": &"jump",
@@ -26,33 +65,50 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_2nree")
+"texture": SubResource("AtlasTexture_ij380")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_ws6de")
+"texture": SubResource("AtlasTexture_163gi")
 }],
 "loop": true,
 "name": &"walk",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ellfv"]
-size = Vector2(74.0001, 103)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a63ha"]
+radius = 42.0
+height = 112.0
 
-[node name="player" type="RigidBody2D"]
-z_index = 2
-collision_mask = 2
-lock_rotation = true
-script = ExtResource("1_bhdxc")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_alnpg"]
+size = Vector2(71, 278)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqq7o"]
+
+[node name="Player1" type="CharacterBody2D"]
+script = ExtResource("1_16yq7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 0.7)
-sprite_frames = SubResource("SpriteFrames_oy02j")
+sprite_frames = SubResource("SpriteFrames_e7k0h")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.12924e-06, -0.5)
-scale = Vector2(0.999999, 0.999999)
-shape = SubResource("RectangleShape2D_ellfv")
+position = Vector2(-2, 34)
+shape = SubResource("CapsuleShape2D_a63ha")
+debug_color = Color(0, 0.6, 0.701961, 0.2)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="LadderDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Ladder" type="CollisionShape2D" parent="LadderDetector"]
+position = Vector2(2110.5, 281)
+shape = SubResource("RectangleShape2D_alnpg")
+
+[node name="Ladder2" type="CollisionShape2D" parent="LadderDetector"]
+shape = SubResource("RectangleShape2D_qqq7o")
+
+[connection signal="body_entered" from="LadderDetector" to="." method="_on_ladder_detector_body_entered"]
+[connection signal="body_exited" from="LadderDetector" to="." method="_on_ladder_detector_body_exited"]
