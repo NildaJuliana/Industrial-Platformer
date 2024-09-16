@@ -1,13 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cu41xrvd7u4cg"]
+[gd_scene load_steps=12 format=3 uid="uid://cu41xrvd7u4cg"]
 
 [ext_resource type="Texture2D" uid="uid://sbq7y24lwc4d" path="res://addons/kenney_platformer-pack-redux/Spritesheets/spritesheet_players.png" id="1_4n0bn"]
 [ext_resource type="Script" path="res://objects/player.gd" id="1_16yq7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pgyeq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_abcbs"]
 atlas = ExtResource("1_4n0bn")
 region = Rect2(384, 768, 128, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n46j3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4h1w"]
 atlas = ExtResource("1_4n0bn")
 region = Rect2(768, 1280, 128, 256)
 
@@ -35,10 +35,10 @@ region = Rect2(640, 1024, 128, 256)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pgyeq")
+"texture": SubResource("AtlasTexture_abcbs")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n46j3")
+"texture": SubResource("AtlasTexture_a4h1w")
 }],
 "loop": true,
 "name": &"climb",
@@ -75,40 +75,24 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a63ha"]
-radius = 42.0
-height = 112.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_alnpg"]
-size = Vector2(71, 278)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqq7o"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brop5"]
+size = Vector2(68, 106)
 
 [node name="Player1" type="CharacterBody2D"]
+position = Vector2(0, -78)
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_16yq7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 32)
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_e7k0h")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 34)
-shape = SubResource("CapsuleShape2D_a63ha")
+position = Vector2(-4, 68)
+shape = SubResource("RectangleShape2D_brop5")
 debug_color = Color(0, 0.6, 0.701961, 0.2)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="LadderDetector" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="Ladder" type="CollisionShape2D" parent="LadderDetector"]
-position = Vector2(2110.5, 281)
-shape = SubResource("RectangleShape2D_alnpg")
-
-[node name="Ladder2" type="CollisionShape2D" parent="LadderDetector"]
-shape = SubResource("RectangleShape2D_qqq7o")
-
-[connection signal="body_entered" from="LadderDetector" to="." method="_on_ladder_detector_body_entered"]
-[connection signal="body_exited" from="LadderDetector" to="." method="_on_ladder_detector_body_exited"]
