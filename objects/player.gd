@@ -10,7 +10,7 @@ const JUMP_ANIMATION = "jump"
 @export var retries = 2
 
 @export var speed = 400
-@export var jump_force = -600
+@export var jump_force = -700
 
 @export var SpwanPosition: Node2D
 
@@ -61,8 +61,6 @@ func take_damage(body: Node2D):
 			$RecoveryTimer.stop()
 			reset_player()
 		else:
-			velocity = Vector2.ZERO
-			self.apply_impulse(Vector2(0, position.y - body.position.y) * 30)
 			$RecoveryTimer.start()
 				
 func reset_player():
@@ -73,6 +71,6 @@ func reset_player():
 		retries = 2
 	else:
 		retries-=1
-	
+
 func _on_recovery_timer_timeout():
 	is_taking_damage = false
